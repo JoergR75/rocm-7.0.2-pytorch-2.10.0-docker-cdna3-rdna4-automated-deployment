@@ -308,7 +308,6 @@ else
 fi
 
 # Final installation message
-print '✅ Docker installation and configuration completed successfully.'
 print '\n✅ Finished ROCm 7.0.2 + OCL 2.x + PyTorch 2.10.0 (nightly for ROCm7) + Transformers environment installation and setup.\n'
 
 # Post-reboot testing instructions
