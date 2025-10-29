@@ -1,0 +1,209 @@
+# 🧩 ROCm 7.0.2 + OpenCL 2.x + PyTorch 2.10.0 (nightly@ROCm7) + Transformers + Docker Setup
+
+[![ROCm](https://img.shields.io/badge/ROCm-6.4.2-ff6b6b?logo=amd)](https://rocm.docs.amd.com/en/docs-6.4.2/about/release-notes.html)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.8.0%2Brocm6.4-ee4c2c?logo=pytorch)](https://pytorch.org/blog/pytorch-2-8/)
+[![Docker](https://img.shields.io/badge/Docker-28.5.1-blue?logo=docker)](https://www.docker.com/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04%20%7C%2024.04-e95420?logo=ubuntu)](https://ubuntu.com)
+
+## 📌 Overview
+This repository provides an **automated installation script** for setting up a complete **AMD ROCm 6.4.2** development environment with:
+- **ROCm 7.0.2** GPU drivers + OpenCL 2.x SDK  
+- **PyTorch 2.10.0 (nightly@ROCm7)** ROCm build  
+- **Transformers 4.57.1** + **Accelerate + Diffusers + Datasets**  
+- **Docker environment** with AMD GPU support  
+- **Preconfigured GPU test script**
+
+The setup is fully **non-interactive** and optimized for both **desktop** and **server** deployments.
+
+---
+
+## 🖥️ Supported Platforms
+
+| **Component**      | **Supported Versions**                                |
+|---------------------|------------------------------------------------------|
+| **OS**            | Ubuntu 22.04.x (Jammy Jellyfish), Ubuntu 24.04.x (Noble Numbat) |
+| **Kernels** tested       | 5.15.0-157 (22.04.5) • 6.8.0-86 (24.04.3)                       |
+| **GPUs**          | AMD CDNA2 • CDNA3 • **RDNA3** • **RDNA4**                 |
+| **Docker**        | 28.5.1 (stable)                                       |
+| **ROCm**          | 7.0.2                                                |
+| **PyTorch**       | 2.8.0+rocm6.4, torchvision 0.23                            |
+| **Transformers**  | 4.57.1                                               |
+
+**⚠️ Note**: **Ubuntu 20.04.x (Focal Fossa)** is **not supported**. The last compatible ROCm version for 20.04 is **6.4.0**.
+
+---
+
+## ⚡ Features
+- Automated **ROCm GPU drivers + HIP + OpenCL SDK** installation
+- **PyTorch ROCm nightly** with GPU acceleration
+- Preinstalled **Transformers**, **Accelerate**, **Diffusers**, and **Datasets**
+- Integrated **Docker environment** with ROCm GPU passthrough
+- **vLLM Docker images** for **RDNA4** & **CDNA3**
+- Optimized for **AI workloads**, **LLM inference**, and **model fine-tuning**
+
+---
+
+## 🚀 Installation
+
+### 1️⃣ **System preperation**
+Install **Ubuntu 22.04.5 LTS** or **Ubuntu 24.04.3 LTS** (Server or Desktop version).
+
+**Recommendations:**
+- Use a fresh Ubuntu installation.
+  - If you have an **older** version of **ROCm** installed, follow our [uninstallation method](https://rocm.docs.amd.com/en/docs-5.6.0/deploy/linux/os-native/uninstall.html).
+  - If you have an **older version** of **PyTorch** installed, you can uninstall it by following the steps for your Ubuntu version below:  
+    | Ubuntu 22.04.x (Jammy Jellyfish) | Ubuntu 24.04.x (Noble Numbat) |
+    |---------------------------------|--------------------------------|
+    | <details><summary>🟢 Show</summary><pre><code>pip3 uninstall torch torchvision</code></pre></details> | <details><summary>🔵 Show</summary><pre><code>pip3 uninstall torch torchvision --break-system-packages</code></pre></details> |
+
+- Assign the full storage capacity during installation.
+- Install **OpenSSH** for remote SSH management.
+
+### 2️⃣ **Download the Script from the Repository**
+```bash
+wget https://raw.githubusercontent.com/JoergR75/rocm-6.4.2-pytorch-2.8.0-rdna4-docker-automated-deployment/refs/heads/main/script_module_ROCm_642_Ubuntu_22.04-24.04_pytorch_280stable_server.py
+```
+
+<img width="920" height="228" alt="{F825B0F7-4B09-4BF5-B946-BB2D54C338F1}" src="https://github.com/user-attachments/assets/be349829-e148-4e7a-a629-0549b7532220" />
+
+### 3️⃣ **Run the Installer**
+```bash
+bash script_module_ROCm_642_Ubuntu_22.04-24.04_pytorch_280stable_server.py
+```
+**⚠️ Note**: Entering the user password may be required.
+
+<img width="933" height="229" alt="{3FEC3863-B012-4D76-B8FA-D9CB4554286D}" src="https://github.com/user-attachments/assets/01611863-6956-4d6a-9a7d-c7820e1a1a94" />
+
+The installation takes ~15 minutes depending on internet speed and hardware performance.
+
+### 4️⃣ **Reboot the System**
+After the successful installation, press "y" to reboot the system and activate all installed components.
+
+<img width="862" height="336" alt="{949D69F3-D6D4-4544-884C-49467F7E6C33}" src="https://github.com/user-attachments/assets/f8c28886-c2d3-4f74-be50-787a4aabac3d" />
+
+## 🧪 Testing ROCm + PyTorch
+
+After rebooting, verify your setup:
+
+This script creates a simple diagnostic python file (test.py) to verify that PyTorch with ROCm support is correctly installed and working.
+
+What it does:
+
+- Prints the PyTorch version and ROCm version.
+- Checks if ROCm is available and how many GPUs are detected.
+- Displays the name of the first GPU (if available).
+- Creates two random 3×3 tensors directly on the GPU (if available).
+- Performs a simple tensor addition operation on the GPU.
+- Prints confirmation that the operation was successful and shows the result.
+
+Example usage:
+```bash
+python3 test.py
+```
+Expected Output Example:
+
+<img width="487" height="169" alt="{37DFFCFB-91B7-480F-88C0-1A3A1A42FEDE}" src="https://github.com/user-attachments/assets/e779ef4b-2e8c-430a-9af6-43071d2bf4ba" />
+
+## 📶 ROCm Bandwidth Test
+
+**AMD’s ROCm Bandwidth Test utility** with the **`-a` (all tests)** flag runs a complete set of bandwidth diagnostics.
+
+### What it does
+
+`rocm-bandwidth-test` is a diagnostic tool included in ROCm that measures **memory bandwidth performance** between:
+
+- Host (CPU) ↔ GPU(s)  
+- GPU ↔ GPU (if multiple GPUs are installed)  
+- GPU internal memory  
+
+### `-a` (all tests) option
+
+Using the `-a` flag runs **all available tests**, including:
+
+- **Host-to-Device (H2D)** bandwidth  
+- **Device-to-Host (D2H)** bandwidth  
+- **Device-to-Device (D2D)** bandwidth (for multi-GPU)  
+- **Bidirectional / concurrent** bandwidth tests  
+
+Run the P2P test
+```bash
+sudo /opt/rocm/bin/rocm-bandwidth-test -a
+```
+
+### Output
+
+The tool prints results in a **matrix format** showing bandwidth (GB/s) between every device pair.
+
+<img width="646" height="663" alt="{51926F23-C527-4447-89E4-69A64A4CB02C}" src="https://github.com/user-attachments/assets/1799223f-a123-41e9-9f87-d4ddf5f9266a" />
+
+⚠️ **Caution:**  
+Make sure **"Resize BAR"** is enabled in the **SBIOS**.  
+If it is disabled, **P2P** will be deactivated, as shown below:
+
+<img width="634" height="654" alt="{C8894609-B944-443A-9A1B-D183F18E9C28}" src="https://github.com/user-attachments/assets/de3ab31b-6946-4770-8798-a9e820ce0c1b" />
+
+### ⚙️ How to Enable **Resize BAR** in SBIOS
+
+1. Enter **SBIOS**  
+2. Navigate to **Advanced**  
+3. Go to **PCI Subsystem Settings**
+
+<img width="357" height="203" alt="image" src="https://github.com/user-attachments/assets/0f1d7c5f-5433-4c5e-afd8-72158c603482" />
+=>
+<img width="492" height="150" alt="image" src="https://github.com/user-attachments/assets/4261936a-d983-481a-8129-9f9bd1f8a0a4" />
+
+## 🐋 Docker Integration
+
+The script sets up a Docker environment with GPU passthrough support via ROCm.
+
+Check Docker Installation
+```bash
+docker --version
+```
+<img width="336" height="51" alt="{F2D3E67E-82FF-4B89-9716-D30432F7BA02}" src="https://github.com/user-attachments/assets/9149968c-ff76-46d4-a821-d43ab20baf43" />
+
+### 🤖 vLLM Docker Images
+
+To use vLLM optimized for RDNA4 and CDNA3:
+Use the container image you need.
+```bash
+# RDNA4 build
+sudo docker pull rocm/vllm-dev:open-r9700-08052025
+```
+or
+```bash
+# CDNA3 build
+sudo docker pull rocm/vllm:latest
+```
+
+Run vLLM with all available AMD GPU Access (example for RDNA4)
+```bash
+sudo docker run -it \
+    --device=/dev/kfd \
+    --device=/dev/dri \
+    --security-opt seccomp=unconfined \
+    --group-add video \
+    rocm/vllm-dev:open-r9700-08052025
+```
+With `rocm-smi`, you can verify all available GPUs (in this case, 2× Radeon AI PRO R9700 GPUs).
+
+<img width="929" height="199" alt="{F715178C-A958-4529-9BB3-9F2E2F7661A2}" src="https://github.com/user-attachments/assets/46094f88-5540-453d-829e-f2ec07b3ad95" />
+
+If you need to add a specific GPU, you can use the **passthrough** option.  
+First, verify the available GPUs in the `/dev/dri` directory.
+
+<img width="381" height="64" alt="{CA7F5FFD-B028-4620-B625-A0FCDA00155D}" src="https://github.com/user-attachments/assets/b976b314-f885-4373-8452-be52a8a05244" />
+
+Let's choose **GPU2**, also referred to as **"card2"** or **"renderD129"**.
+```bash
+sudo docker run -it \
+    --device=/dev/kfd \
+    --device=/dev/dri/card2 \
+    --device=/dev/dri/renderD129 \
+    --security-opt seccomp=unconfined \
+    --group-add video \
+    rocm/vllm-dev:open-r9700-08052025
+```
+GPU2 has been added to the container
+
+<img width="933" height="305" alt="{988A3311-56B1-4BDB-95A6-DF00A4D2BE6D}" src="https://github.com/user-attachments/assets/b630ad80-b163-453a-be29-b03c346aae8b" />
