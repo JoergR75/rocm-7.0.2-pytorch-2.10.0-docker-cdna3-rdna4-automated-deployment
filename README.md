@@ -1,4 +1,4 @@
-# 🧩 ROCm 7.0.2 + OpenCL 2.x + PyTorch 2.10.0 (nightly@ROCm7) + Transformers + Docker Setup
+# 🧩 ROCm 7.0.2 + OpenCL 2.x + PyTorch 2.10.0 (Preview@ROCm7) + Transformers + Docker Setup
 
 [![ROCm](https://img.shields.io/badge/ROCm-7.0.2-ff6b6b?logo=amd)](https://rocm.docs.amd.com/en/docs-7.0.2/about/release-notes.html)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.10.0%20%28nightly%29-ee4c2c?logo=pytorch)](https://pytorch.org/get-started/locally/)
@@ -8,7 +8,7 @@
 ## 📌 Overview
 This repository provides an **automated installation script** for setting up a complete **AMD ROCm 7.0.2** development environment with:
 - **ROCm 7.0.2** GPU drivers + OpenCL 2.x SDK  
-- **PyTorch 2.10.0 (nightly@ROCm7)** ROCm build  
+- **PyTorch 2.10.0 (Preview@ROCm7)** ROCm build  
 - **Transformers 4.57.1** + **Accelerate + Diffusers + Datasets**  
 - **Docker environment** with AMD GPU support  
 - **Preconfigured GPU test script**
