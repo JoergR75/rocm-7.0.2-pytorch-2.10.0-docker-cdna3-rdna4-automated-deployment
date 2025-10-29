@@ -76,10 +76,10 @@ install_jellyfish() {
     if dpkg -l | grep -q rocm; then
         print '\nROCm detected. Removing ROCm and associated packages ...\n'
 
-        sudo apt autoremove -y rocm-core
-        sudo apt autoremove -y amdgpu-dkms
+        sudo apt autoremove -yq rocm-core
+        sudo apt autoremove -yq amdgpu-dkms
         sudo rm -rf /var/cache/apt/*
-        sudo apt-get clean all
+        sudo apt-get clean all -yq
 
         print '\nROCm packages removed successfully.'
     else
@@ -102,13 +102,13 @@ install_jellyfish() {
     # Download the installer script
     wget https://repo.radeon.com/amdgpu-install/7.0.2/ubuntu/jammy/amdgpu-install_7.0.2.70002-1_all.deb
     # install latest headers and static library files necessary for building C++ programs which use libstdc++
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install "linux-headers-$(uname -r)" "linux-modules-extra-$(uname -r)" --yes
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install python3-setuptools python3-wheel libpython3.10 --yes
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install libstdc++-12-dev --yes
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install git-lfs --yes
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install "linux-headers-$(uname -r)" "linux-modules-extra-$(uname -r)" -yq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install python3-setuptools python3-wheel libpython3.10 -yq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install libstdc++-12-dev -yq
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install git-lfs -yq
 
     # Install with "default" settings (no interaction)
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ./amdgpu-install_7.0.2.70002-1_all.deb
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.0.2.70002-1_all.deb
 
     # Installing multiple use cases including ROCm 7.0.2, OCL and HIP SDK
 
