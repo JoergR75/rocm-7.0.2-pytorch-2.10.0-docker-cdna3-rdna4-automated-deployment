@@ -14,7 +14,7 @@ This repository provides an **automated installation script** for setting up a c
 - **Preconfigured GPU test script**
 
 The setup is fully **non-interactive** and optimized for both **desktop** and **server** deployments. In addition it checks whether ROCm or PyTorch (installed via pip) is already present on the system.
-If an existing ROCm installation is detected, it removes ROCm and related packages to ensure a clean environment. It also detects and uninstalls any PyTorch packages (including ROCm-specific builds) to prevent version conflicts before proceeding with a fresh installation.
+If an existing ROCm installation is detected, it removes ROCm and related packages to ensure a clean environment. It also **detects** and **uninstalls** any PyTorch packages (including ROCm-specific builds) to prevent version conflicts before proceeding with a fresh installation.
 
 ---
 
