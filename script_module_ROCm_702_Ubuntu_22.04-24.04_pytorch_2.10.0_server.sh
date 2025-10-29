@@ -71,6 +71,34 @@ install_focal() {
 
 install_jellyfish() {
     print '\nUbuntu 22.04.x (jammy jellyfish) installation method has been set.\n'
+    print '\nChecking if ROCm is installed ...\n'
+
+    if dpkg -l | grep -q rocm; then
+        print '\nROCm detected. Removing ROCm and associated packages ...\n'
+
+        sudo apt autoremove -y rocm-core
+        sudo apt autoremove -y amdgpu-dkms
+        sudo rm -rf /var/cache/apt/*
+        sudo apt-get clean all
+
+        print '\nROCm packages removed successfully.'
+    else
+        print 'No ROCm installation detected.'
+    fi
+
+    print '\nChecking for PyTorch packages installed via pip ...\n'
+
+    # Use pip with --break-system-packages to avoid "externally-managed-environment" error
+    if python3 -m pip list | grep torch; then
+        python3 -m pip uninstall -y torch torchvision torchaudio pytorch-triton-rocm
+        printf "\nPyTorch packages uninstalled successfully.\n"
+    else
+        printf "\nNo PyTorch packages found.\n"
+    fi
+
+    # Pause before continuing
+    read -n1 -r -p "Press any key to continue..." key
+
     # Download the installer script
     wget https://repo.radeon.com/amdgpu-install/7.0.2/ubuntu/jammy/amdgpu-install_7.0.2.70002-1_all.deb
     # install latest headers and static library files necessary for building C++ programs which use libstdc++
