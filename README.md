@@ -23,7 +23,7 @@ If an existing ROCm installation is detected, it removes ROCm and related packag
 | **Component**      | **Supported Versions**                                |
 |---------------------|------------------------------------------------------|
 | **OS**            | Ubuntu 22.04.x (Jammy Jellyfish), Ubuntu 24.04.x (Noble Numbat) |
-| **Kernels** tested       | 5.15.0-157 (22.04.5) • 6.8.0-86 (24.04.3)                       |
+| **Kernels** tested       | 5.15.0-160 (22.04.5) • 6.8.0-86 (24.04.3)                       |
 | **GPUs**          | AMD **CDNA2** • **CDNA3** • **RDNA3** • **RDNA4**                 |
 | **Docker**        | 28.5.1 (stable)                                       |
 | **ROCm**          | 7.0.2                                                |
