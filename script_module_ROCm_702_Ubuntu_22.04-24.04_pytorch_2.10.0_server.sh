@@ -306,14 +306,14 @@ version_ge() {
 # --- Function: install_docker -------------------------------------------------
 install_docker() {
     echo -e "\nInstalling and configuring Docker (stable version) with required dependencies..."
-    sudo apt-get update
-    sudo apt-get install -yq apt-transport-https ca-certificates curl software-properties-common
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
     https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
       | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-    sudo apt-get update
-    sudo apt-get install -yq docker-ce docker-ce-cli containerd.io
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq docker-ce docker-ce-cli containerd.io
     sudo usermod -a -G docker ${SUDO_USER:-$USER}
     sudo service docker restart
     docker --version
