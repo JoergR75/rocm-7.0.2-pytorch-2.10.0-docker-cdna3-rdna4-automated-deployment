@@ -114,8 +114,8 @@ install_jellyfish() {
 
     print '\nInstalling ROCm 7.0.2 + OCL 2.x environment ...\n'
 
-    sudo apt-get update
-    sudo apt-get install -y amdgpu-dkms rocm
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq amdgpu-dkms rocm
 
     # Groups setup and ROCm/OCL path in global *.icd file
     # Add path into global amdocl64*.icd file
@@ -131,13 +131,13 @@ install_jellyfish() {
 
     source ~/.bashrc
     sudo DEBIAN_FRONTEND=noninteractive apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y htop
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y freeipmi-tools
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y ncdu
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y cmake
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libmsgpack-dev
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y rocm-bandwidth-test
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq git
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq htop
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq freeipmi-tools
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ncdu
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq cmake
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq libmsgpack-dev
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq rocm-bandwidth-test
 
     echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
     source ~/.bashrc
@@ -307,13 +307,13 @@ version_ge() {
 install_docker() {
     echo -e "\nInstalling and configuring Docker (stable version) with required dependencies..."
     sudo apt-get update
-    sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+    sudo apt-get install -yq apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
     echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
     https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
       | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     sudo apt-get update
-    sudo apt-get install -y docker-ce docker-ce-cli containerd.io
+    sudo apt-get install -yq docker-ce docker-ce-cli containerd.io
     sudo usermod -a -G docker ${SUDO_USER:-$USER}
     sudo service docker restart
     docker --version
