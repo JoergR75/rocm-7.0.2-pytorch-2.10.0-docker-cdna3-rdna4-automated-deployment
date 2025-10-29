@@ -6,7 +6,7 @@
 [![Ubuntu](https://img.shields.io/badge/Ubuntu-22.04%20%7C%2024.04-e95420?logo=ubuntu)](https://ubuntu.com)
 
 ## 📌 Overview
-This repository provides an **automated installation script** for setting up a complete **AMD ROCm 6.4.2** development environment with:
+This repository provides an **automated installation script** for setting up a complete **AMD ROCm 7.0.2** development environment with:
 - **ROCm 7.0.2** GPU drivers + OpenCL 2.x SDK  
 - **PyTorch 2.10.0 (nightly@ROCm7)** ROCm build  
 - **Transformers 4.57.1** + **Accelerate + Diffusers + Datasets**  
