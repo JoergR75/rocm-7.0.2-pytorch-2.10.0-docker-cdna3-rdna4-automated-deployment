@@ -49,13 +49,11 @@ The setup is fully **non-interactive** and optimized for both **desktop** and **
 Install **Ubuntu 22.04.5 LTS** or **Ubuntu 24.04.3 LTS** (Server or Desktop version).
 
 **Recommendations:**
-- Use a fresh Ubuntu installation.
-  - If you have an **older** version of **ROCm** installed, follow our [uninstallation method](https://rocm.docs.amd.com/en/docs-5.6.0/deploy/linux/os-native/uninstall.html).
-  - If you have an **older version** of **PyTorch** installed, you can uninstall it by following the steps for your Ubuntu version below:  
-    | Ubuntu 22.04.x (Jammy Jellyfish) | Ubuntu 24.04.x (Noble Numbat) |
-    |---------------------------------|--------------------------------|
-    | <details><summary>🟢 Show</summary><pre><code>pip3 uninstall torch torchvision</code></pre></details> | <details><summary>🔵 Show</summary><pre><code>pip3 uninstall torch torchvision --break-system-packages</code></pre></details> |
-
+- Use a fresh Ubuntu installation if possible.
+- The script automatically checks the system for installed versions of ROCm, PyTorch, and Docker, and removes them if found.
+  - On a fresh Ubuntu installation, the script automatically skips the deinstallation routine, as illustrated below.
+    <img width="697" height="188" alt="{DB29AEE6-CF12-4D0D-BA9F-611E73DBE146}" src="https://github.com/user-attachments/assets/48516cb6-e7bd-4c7e-94bb-f3ec9a95b243" />
+    
 - Assign the full storage capacity during installation.
 - Install **OpenSSH** for remote SSH management.
 
