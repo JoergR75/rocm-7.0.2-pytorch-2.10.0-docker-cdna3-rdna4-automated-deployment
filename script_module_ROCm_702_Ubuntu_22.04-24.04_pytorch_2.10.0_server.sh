@@ -25,8 +25,8 @@
 # SOFTWARE VERSIONS:
 # ---------------------------------------------------------------------------------------------------------------
 # ROCm Platform:         7.0.2
-# ROCm Release Notes:    https://rocm.docs.amd.com/en/docs-7.0.2/about/release-notes.html
-# ROCm Driver Repo:      https://repo.radeon.com/amdgpu-install/7.0.2/ubuntu/
+# ROCm Release Notes:    https://rocm.docs.amd.com/en/docs-7.1.0/about/release-notes.html
+# ROCm Driver Repo:      https://repo.radeon.com/amdgpu-install/7.1/ubuntu/
 #
 # PyTorch:               2.10.0.dev20251027+rocm7.0
 # Transformers:          4.57.1
@@ -47,7 +47,7 @@
 # ---------------------------------------------------------------------------------------------------------------
 # Author:                Joerg Roskowetz
 # Estimated Runtime:     ~15 minutes (depending on system performance and internet speed)
-# Last Updated:          October 29th, 2025
+# Last Updated:          November 21st, 2025
 # ================================================================================================================
 
 # global stdout method
@@ -65,7 +65,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 print '\nDone\n'
 
 install_focal() {
-    print '\nUbuntu 20.04.x (focal) is not longer be supported for ROCm 7.0.2. The last supported version is ROCm 6.4.0.\n'
+    print '\nUbuntu 20.04.x (focal) is not longer be supported for ROCm 7.0.2 The last supported version is ROCm 6.4.0.\n'
     print 'More details can be verified under https://repo.radeon.com/amdgpu-install/6.4/ubuntu/ \n'
 }
 
@@ -108,7 +108,7 @@ install_jellyfish() {
     sudo DEBIAN_FRONTEND=noninteractive apt-get install git-lfs -yq
 
     # Install with "default" settings (no interaction)
-    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.0.2.70002-1_all.deb
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -yq ./amdgpu-install_7.0.2.70002-1_all.deb --allow-downgrades
 
     # Installing multiple use cases including ROCm 7.0.2, OCL and HIP SDK
 
@@ -196,7 +196,7 @@ install_noble() {
     sudo DEBIAN_FRONTEND=noninteractive apt install git-lfs --yes
 
     # Install with "default" settings (no interaction)
-    sudo DEBIAN_FRONTEND=noninteractive apt install -y ./amdgpu-install_7.0.2.70002-1_all.deb
+    sudo DEBIAN_FRONTEND=noninteractive apt install -y ./amdgpu-install_7.0.2.70002-1_all.deb --allow-downgrades
 
     # Installing multiple use cases including ROCm 7.0.2, OCL and HIP SDK
 
@@ -276,10 +276,36 @@ source ~/.bashrc
 # create test script
 cd ~
 cat <<EOF > test.py
-import torch
+#!/usr/bin/env python3
 
-print("\nPyTorch version:", torch.__version__)
-print("ROCm version:", torch.version.hip if hasattr(torch.version, 'hip') else "Not ROCm build")
+import torch
+import subprocess
+import re
+import os
+
+def get_cpu_model():
+    with open("/proc/cpuinfo") as f:
+        for line in f:
+            if "model name" in line:
+                return line.split(":")[1].strip()
+
+print("\nInstalled CPU:", get_cpu_model())
+
+def get_total_memory_gb():
+    with open("/proc/meminfo") as f:
+        for line in f:
+            if line.startswith("MemTotal:"):
+                # Extract the numeric value in kB
+                mem_kb = int(re.findall(r'\d+', line)[0])
+                # Convert to GB (1 GB = 1024^2 kB)
+                mem_gb = mem_kb / (1024 ** 2)
+                return f"Total System-Memory: {mem_gb:.0f} GB"
+
+if __name__ == "__main__":
+    print(get_total_memory_gb())
+
+print("PyTorch version:", torch.__version__)
+print("ROCm version:", subprocess.getoutput("/opt/rocm/bin/hipconfig --version"))
 print("Is ROCm available:", torch.version.hip is not None)
 print("Number of GPUs:", torch.cuda.device_count())
 print("\nGPU Name:", torch.cuda.get_device_name(0) if torch.cuda.device_count() > 0 else "No GPU detected")
