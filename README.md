@@ -50,36 +50,39 @@ If an existing ROCm installation is detected, it removes ROCm and related packag
 Install **Ubuntu 22.04.5 LTS** or **Ubuntu 24.04.3 LTS** (Server or Desktop version).
 
 **Recommendations:**
-- Use a fresh Ubuntu installation if possible.
-- Assign the full storage capacity during installation.
-- Install **OpenSSH** for remote SSH management.
-- The script automatically checks the system for installed versions of ROCm, PyTorch, and Docker, and removes them if found.
-  - On a fresh Ubuntu installation, the script automatically skips the deinstallation routine, as illustrated below.
+- Use a fresh Ubuntu installation if possible
+- Assign the full storage capacity during installation
+- Install **OpenSSH** for remote SSH management
+- The script automatically checks the system for installed versions of ROCm, PyTorch, and Docker, and removes them if found
+  - On a fresh Ubuntu installation, the script automatically skips the deinstallation routine, as illustrated below
     <img width="697" height="188" alt="{DB29AEE6-CF12-4D0D-BA9F-611E73DBE146}" src="https://github.com/user-attachments/assets/48516cb6-e7bd-4c7e-94bb-f3ec9a95b243" />
   - If an existing version is detected, it will be deleted, regardless of whether it is the same or an older release.
     <img width="724" height="312" alt="{ABC66E35-246B-49CD-B988-5C19DA511ACB}" src="https://github.com/user-attachments/assets/c0a87932-fb0e-4adb-8bf9-cbe80d13f528" />
+- SBIOS settings:
+  - When using Linux, you should disable Secure Boot
+  - On WRX80 and WRX90 motherboard solutions, make sure SR-IOV is enabled — there are known issues with Ubuntu Linux detecting the network otherwise
 
 ### 2️⃣ **Download the Script from the Repository**
 ```bash
-wget https://raw.githubusercontent.com/JoergR75/rocm-7.0.2-pytorch-2.10.0-docker-cdna3-rdna4-automated-deployment/refs/heads/main/script_module_ROCm_702_Ubuntu_22.04-24.04_pytorch_2.10.0_server.sh
+wget https://raw.githubusercontent.com/JoergR75/rocm-7.1.0-pytorch-2.10.0-docker-cdna1-2-3-automated-deployment/refs/heads/main/script_module_ROCm_710_Ubuntu_22.04-24.04_pytorch_2.10.0_server.sh
 ```
 
-<img width="1308" height="242" alt="{AFE61E1D-B051-4B21-B0DE-D30693EEE0F4}" src="https://github.com/user-attachments/assets/5e6e36e9-7611-4971-8da5-e85542db5cc6" />
+<img width="979" height="294" alt="{22087E3C-0129-4714-ABB6-2F9079A06DEE}" src="https://github.com/user-attachments/assets/d6601f33-bf8c-4c11-8b7d-26004b2d33b3" />
 
 ### 3️⃣ **Run the Installer**
 ```bash
-bash script_module_ROCm_702_Ubuntu_22.04-24.04_pytorch_2.10.0_server.sh
+bash script_module_ROCm_710_Ubuntu_22.04-24.04_pytorch_2.10.0_server.sh
 ```
 **⚠️ Note**: Entering the user password may be required.
 
-<img width="1093" height="405" alt="{A50EB14D-8D82-4A22-A341-3291249C03C8}" src="https://github.com/user-attachments/assets/8ba6a2f7-4bb6-4fd0-905b-eb45c809bac7" />
+<img width="930" height="439" alt="{F05FEB15-979A-4BF9-AD1B-289426CF8A7D}" src="https://github.com/user-attachments/assets/2b93b8ed-5b40-438d-9945-dbc6cd0ab712" />
 
 The installation takes ~15 minutes depending on internet speed and hardware performance.
 
 ### 4️⃣ **Reboot the System**
 After the successful installation, press "y" to reboot the system and activate all installed components.
 
-<img width="1097" height="438" alt="{05ED9EF5-B612-4C32-8972-DFB76594F215}" src="https://github.com/user-attachments/assets/fa38dcf9-979e-4a80-aa50-4be3ce4a838f" />
+<img width="972" height="424" alt="image" src="https://github.com/user-attachments/assets/b8703dfe-6b80-4b9c-aaa8-bf94d313ad6e" />
 
 ## 🧪 Testing ROCm + PyTorch
 
