@@ -92,6 +92,7 @@ This script creates a simple diagnostic python file (test.py) to verify that PyT
 
 What it does:
 
+- Shows the CPU and installed memory
 - Prints the PyTorch version and ROCm version.
 - Checks if ROCm is available and how many GPUs are detected.
 - Displays the name of the first GPU (if available).
