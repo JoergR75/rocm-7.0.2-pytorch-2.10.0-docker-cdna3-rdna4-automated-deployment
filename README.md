@@ -25,7 +25,7 @@ If an existing ROCm installation is detected, it removes ROCm and related packag
 | **OS**            | Ubuntu 22.04.x (Jammy Jellyfish), Ubuntu 24.04.x (Noble Numbat) |
 | **Kernels** tested       | 5.15.0-160 (22.04.5) • 6.8.0-87 (24.04.3)                       |
 | **GPUs**          | AMD **CDNA2** • **CDNA3** • **RDNA3** • **RDNA4**                 |
-| **Docker**        | 28.5.1 (stable)                                       |
+| **Docker**        | 29.0.2 (stable)                                       |
 | **ROCm**          | 7.0.2                                                |
 | **PyTorch**       | torch 2.10.0.dev20251027+rocm7.0, torchvision 0.25.0.dev20251028+rocm7.0                            |
 | **Transformers**  | 4.57.1                                               |
