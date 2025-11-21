@@ -105,7 +105,7 @@ python3 test.py
 ```
 Expected Output Example:
 
-<img width="850" height="244" alt="{D97D78FE-4648-4881-BB5C-3EF125130EB3}" src="https://github.com/user-attachments/assets/20653432-7a8a-45ad-8ea7-d848c3c1c6ae" />
+<img width="779" height="294" alt="{2BFF554C-D825-4E01-9B18-8CA52A59D97F}" src="https://github.com/user-attachments/assets/9bfdb5bb-40c2-4305-b66a-902efcd6c8c8" />
 
 ## 📶 ROCm Bandwidth Test
 
